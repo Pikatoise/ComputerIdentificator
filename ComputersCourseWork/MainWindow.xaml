@@ -1,0 +1,922 @@
+﻿<Window x:Class="ComputersCourseWork.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ComputersCourseWork"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="White"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="База ПК" 
+        Height="650" 
+        Width="1010"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanMinimize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.07*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Body -->
+        <TabControl
+            SelectionChanged="TabControl_SelectionChanged"
+            Grid.Row="0"
+            materialDesign:ColorZoneAssist.Mode="Custom"
+            materialDesign:NavigationRailAssist.SelectionCornerRadius="5"
+            materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
+            Background="White"
+            Style="{StaticResource MaterialDesignNavigationRailTabControl}"
+            TabStripPlacement="Top">
+        
+            <!-- Текущее устройство -->
+            <TabItem
+                x:Name="TItemCurrentComputer"
+                Width="220"
+                Height="80">
+                <TabItem.Header>
+                    <StackPanel>
+                        <materialDesign:PackIcon 
+                            Kind="ComputerClassic"
+                            Width="35"
+                            Height="35"
+                            HorizontalAlignment="Center"
+                            Foreground="Black"/>
+
+                        <TextBlock
+                            Text="Текущее устройство"
+                            FontSize="20"
+                            Margin="10 0 10 10"
+                            Foreground="Black"/>
+                    </StackPanel>
+                </TabItem.Header>
+
+                <Border Padding="10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.5*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Шапка -->
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="0.35*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border 
+                                Grid.Column="0"
+                                Padding="20 0 0 0">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon
+                                        x:Name="IconDeviceType"
+                                        Kind="DesktopTowerMonitor"
+                                        Width="150"
+                                        Height="170"
+                                        Margin="0 -10 10 0"/>
+
+                                    <StackPanel
+                                        Margin="0 10 0 0">
+                                        <TextBlock
+                                            x:Name="TBlockPcName"
+                                            MouseDown="TBlockPcName_MouseDown"
+                                            Text="Desktop-XXXXXX"
+                                            TextDecorations="Underline"
+                                            FontSize="33"
+                                            Width="350"
+                                            HorizontalAlignment="Left"
+                                            Cursor="Pen"
+                                            Margin="0 0 0 5"/>
+
+                                        <TextBlock
+                                            Text="Описание:"
+                                            FontSize="20"
+                                            Margin="0 0 0 5"/>
+
+                                        <materialDesign:Card
+                                            Background="#f9f9f9"
+                                            Padding="5"
+                                            MouseDown="PcDescription_MouseDown"
+                                            Cursor="Pen">
+                                            <TextBlock
+                                                x:Name="TBlockPcDescription"
+                                                Text="Отсутствует..."
+                                                MaxWidth="500"
+                                                Width="500"
+                                                Height="50"
+                                                TextWrapping="Wrap"
+                                                HorizontalAlignment="Left"/>
+                                        </materialDesign:Card>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+
+                            <StackPanel Grid.Column="1">
+                                <StackPanel 
+                                    Orientation="Horizontal"
+                                    Margin="0 0 0 5">
+                                    <materialDesign:PackIcon
+                                        Kind="MicrosoftWindows"
+                                        Height="50"
+                                        Width="50"
+                                        Foreground="DeepSkyBlue"
+                                        VerticalAlignment="Center"/>
+                                    <TextBlock
+                                        x:Name="TBlockWindowsVersion"
+                                        Text="Windows X"
+                                        FontSize="24"
+                                        Width="170"
+                                        TextWrapping="Wrap"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"/>
+                                </StackPanel>
+
+                                <TextBlock
+                                    Text="Ключ:"
+                                    Margin="5 0 0 5"/>
+                                <TextBlock
+                                    x:Name="TBlockWindowsKey"
+                                    Text="XXXXX-XXXXX-XXXXX-XXXXX"
+                                    VerticalAlignment="Center"
+                                    Margin="5 0 0 0"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <!-- Тело -->
+                        <Border
+                            Grid.Row="1"
+                            Margin="10"
+                            BorderThickness="1"
+                            BorderBrush="Black">
+                            <TabControl
+                                materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
+                                SnapsToDevicePixels="True"
+                                Style="{StaticResource MaterialDesignNavigationRailTabControl}"
+                                TabStripPlacement="Left"
+                                Height="305">
+                                
+                                <!-- Комплектующие -->
+                                <TabItem 
+                                    Width="130"
+                                    Margin="0 0 0 10"
+                                    Height="140">
+                                    <TabItem.Header>
+                                        <StackPanel>
+                                            <materialDesign:PackIcon
+                                                Kind="Harddisk"
+                                                Width="40"
+                                                Height="40"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                Foreground="Black"/>
+                                            <TextBlock
+                                                Text="Комплектующие"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                Foreground="Black"/>
+                                        </StackPanel>
+                                    </TabItem.Header>
+
+                                    <DataGrid
+                                        x:Name="DGridHardware"
+                                        AutoGenerateColumns="False"
+                                        HeadersVisibility="Column"
+                                        CanUserAddRows="False"
+                                        CanUserDeleteRows="False"
+                                        CanUserReorderColumns="False"
+                                        CanUserResizeColumns="True"
+                                        CanUserResizeRows="True"
+                                        CanUserSortColumns="True"
+                                        IsReadOnly="True">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn
+                                                Binding="{Binding Path=Title}"
+                                                Header="Тип"
+                                                Width="300"/>
+                                            <DataGridTextColumn
+                                                Binding="{Binding Path=Value}"
+                                                Header="Наименование"/>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </TabItem>
+
+                                <!-- Сеть -->
+                                <TabItem 
+                                    Width="130"
+                                    Height="160">
+                                    <TabItem.Header>
+                                        <StackPanel>
+                                            <materialDesign:PackIcon
+                                                Kind="NetworkPos"
+                                                Width="40"
+                                                Height="40"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                Foreground="Black"/>
+                                            <TextBlock
+                                                Text="Сеть"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                Foreground="Black"/>
+                                        </StackPanel>
+                                    </TabItem.Header>
+
+                                    <Border Padding="20">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <StackPanel Grid.Column="0">
+                                                <TextBlock
+                                                    Text="Настройки IP:"
+                                                    FontSize="16"/>
+                                            </StackPanel>
+
+                                            <StackPanel Grid.Column="1">
+                                                <TextBlock
+                                                    Text="Настройки DNS:"
+                                                    FontSize="16"/>
+                                            </StackPanel>
+
+                                            <Grid
+                                                Grid.Column="0"
+                                                Grid.ColumnSpan="2"
+                                                Margin="0 30 10 0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="0.32*"/>
+                                                    <RowDefinition Height="1*"/>
+                                                    <RowDefinition Height="0.3*"/>
+                                                </Grid.RowDefinitions>
+
+                                                <StackPanel 
+                                                    Grid.Column="0"
+                                                    Grid.Row="0">
+                                                    <RadioButton
+                                                        x:Name="RButtonDHCPEnabled"
+                                                        Checked="RButtonDHCPEnabled_Checked"
+                                                        Content="Получать IP-адрес автоматически"
+                                                        Margin="0 0 0 5"/>
+                                                    <RadioButton
+                                                        x:Name="RButtonDHCPDisabled"
+                                                        Checked="RButtonDHCPDisabled_Checked"
+                                                        Content="Использовать следующий IP-адрес:"/>
+                                                </StackPanel>
+
+                                                <materialDesign:Card
+                                                    x:Name="CardNetworkSettings"
+                                                    Grid.Column="0"
+                                                    Grid.ColumnSpan="2"
+                                                    Grid.Row="1"
+                                                    Padding="5 0 5 0">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <StackPanel
+                                                            Grid.Column="0"
+                                                            Margin="0 10 0 0">
+                                                            <TextBlock
+                                                                Text="IP-адрес:"/>
+                                                            <TextBox
+                                                                x:Name="TBoxIPV4"
+                                                                Width="180"
+                                                                Height="25"
+                                                                HorizontalAlignment="Left"
+                                                                Margin="0 0 0 2"/>
+
+                                                            <TextBlock
+                                                                Text="Маска подсети:"/>
+                                                            <TextBox
+                                                                x:Name="TBoxSubnetMask"
+                                                                Height="25"
+                                                                Width="180"
+                                                                HorizontalAlignment="Left"
+                                                                Margin="0 0 0 2"/>
+
+                                                            <TextBlock
+                                                                Text="Основной шлюз:"/>
+                                                            <TextBox
+                                                                x:Name="TBoxGateway"
+                                                                Height="25"
+                                                                Width="180"
+                                                                HorizontalAlignment="Left"/>
+                                                        </StackPanel>
+
+                                                        <StackPanel
+                                                            Grid.Column="1"
+                                                            Margin="0 15 0 0">
+                                                            <TextBlock
+                                                                Text="DNS-сервер:"/>
+                                                            <TextBox
+                                                                x:Name="TBoxDNS"
+                                                                Height="25"
+                                                                Width="180"
+                                                                HorizontalAlignment="Left"/>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </materialDesign:Card>
+
+                                                <Button
+                                                    x:Name="ButtonSaveNetworkSettings"
+                                                    Click="ButtonSaveNetworkSettings_Click"
+                                                    Grid.Row="2"
+                                                    Grid.ColumnSpan="2"
+                                                    Width="300"
+                                                    Background="Transparent"
+                                                    BorderBrush="Black"
+                                                    BorderThickness="2"
+                                                    VerticalAlignment="Bottom"
+                                                    HorizontalAlignment="Center"
+                                                    Margin="0 3 0 0"
+                                                    Height="35">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <materialDesign:PackIcon
+                                                            Kind="ContentSave"
+                                                            Foreground="Black"
+                                                            Width="24"
+                                                            Height="24"
+                                                            VerticalAlignment="Top"
+                                                            Margin="0 0 5 0"/>
+                                                        <TextBlock
+                                                            Text="Сохранить настройки сети"
+                                                            Foreground="Black"
+                                                            VerticalAlignment="Center"/>
+                                                    </StackPanel>
+                                                </Button>
+                                            </Grid>
+
+                                            <StackPanel Grid.Column="2">
+                                                <TextBlock
+                                                    Text="Настройки Proxy:"
+                                                    FontSize="16"
+                                                    Margin="0 0 0 10"/>
+                                                <CheckBox 
+                                                    x:Name="CBoxEnableProxy"
+                                                    Click="CBoxEnableProxy_Click"
+                                                    Content="Включить прокси?"
+                                                    Margin="0 0 0 20"/>
+
+                                                <StackPanel
+                                                    x:Name="SPanelProxySettings"
+                                                    IsEnabled="False">
+                                                    <TextBlock
+                                                        Text="Адрес:"/>
+                                                    <TextBox
+                                                        x:Name="TBoxProxyAdress"
+                                                        Margin="0 0 0 10"/>
+                                                    
+                                                    <TextBlock
+                                                        Text="Порт:"/>
+                                                    <TextBox
+                                                        x:Name="TBoxProxyPort"
+                                                        Margin="0 0 0 65"/>
+
+                                                    <Button
+                                                        x:Name="ButtonSaveProxySettings"
+                                                        Click="ButtonSaveProxySettings_Click"
+                                                        Background="Transparent"
+                                                        BorderBrush="Black"
+                                                        BorderThickness="2"
+                                                        Height="40">
+                                                        <StackPanel 
+                                                            Orientation="Horizontal"
+                                                            VerticalAlignment="Center"
+                                                            HorizontalAlignment="Center">
+                                                            <materialDesign:PackIcon
+                                                                Kind="ContentSave"
+                                                                Foreground="Black"
+                                                                Height="25"
+                                                                Width="25"
+                                                                VerticalAlignment="Center"
+                                                                Margin="0 0 5 0"/>
+                                                            <TextBlock
+                                                                Text="Сохранить"
+                                                                Foreground="Black"
+                                                                VerticalAlignment="Center"
+                                                                HorizontalAlignment="Center"
+                                                                FontSize="16"/>
+                                                        </StackPanel>
+                                                    </Button>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                </TabItem>
+                            </TabControl>
+                        </Border>
+                    </Grid>
+                </Border>
+            </TabItem>
+
+            <!-- Все устройства -->
+            <TabItem
+                x:Name="TItemComputerDB"
+                Width="220">
+                <TabItem.Header>
+                    <StackPanel>
+                        <Canvas 
+                            Height="35"
+                            HorizontalAlignment="Center">
+                            <materialDesign:PackIcon 
+                                Kind="ComputerClassic"
+                                Width="35"
+                                Height="35"
+                                Foreground="Gray"
+                                Canvas.Left="2"
+                                Canvas.Top="0"/>
+                            <materialDesign:PackIcon 
+                                Kind="ComputerClassic"
+                                Width="35"
+                                Height="35"
+                                Foreground="Gray"
+                                Canvas.Left="-32"
+                                Canvas.Top="0"/>
+                            <materialDesign:PackIcon 
+                                Kind="ComputerClassic"
+                                Width="35"
+                                Height="35"
+                                Foreground="Black"
+                                Canvas.Left="-15"
+                                Canvas.Top="5"/>
+                        </Canvas>
+
+                        <TextBlock
+                            Text="Все устройства"
+                            FontSize="20"
+                            Margin="10 0 10 10"
+                            Foreground="Black"/>
+                    </StackPanel>
+                </TabItem.Header>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.25*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border
+                        Grid.Column="0"
+                        Margin="5 5 0 0"
+                        BorderBrush="Black"
+                        BorderThickness="2"
+                        CornerRadius="5">
+                        <ListBox 
+                            x:Name="LBoxDevices"
+                            SelectionChanged="LBoxDevices_SelectionChanged"/>
+                    </Border>
+
+                    <!-- Данные -->
+                    <Border 
+                        x:Name="BorderDbData"
+                        Visibility="Visible"
+                        Grid.Column="1"
+                        Padding="10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.5*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="0.05*"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- Шапка -->
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="0.45*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border 
+                                    Grid.Column="0"
+                                    Padding="20 0 0 0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon
+                                            x:Name="IconDeviceTypeDB"
+                                            Kind="DesktopTowerMonitor"
+                                            Width="100"
+                                            Height="160"
+                                            Margin="0 -10 10 0"/>
+
+                                        <StackPanel
+                                            Margin="0 10 0 0">
+                                            <TextBlock
+                                                x:Name="TBlockPcNameDB"
+                                                Text="Desktop-XXXXXX"
+                                                FontSize="28"
+                                                Width="350"
+                                                HorizontalAlignment="Left"
+                                                Margin="0 0 0 5"/>
+
+                                            <TextBlock
+                                                Text="Описание:"
+                                                FontSize="18"
+                                                Margin="0 0 0 5"/>
+
+                                            <materialDesign:Card
+                                                Background="#f9f9f9"
+                                                Padding="5">
+                                                <TextBlock
+                                                    x:Name="TBlockPcDescriptionDB"
+                                                    Text="Отсутствует..."
+                                                    MaxWidth="360"
+                                                    Width="360"
+                                                    Height="50"
+                                                    TextWrapping="Wrap"
+                                                    HorizontalAlignment="Left"/>
+                                            </materialDesign:Card>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+
+                                <StackPanel Grid.Column="1">
+                                    <StackPanel 
+                                        Orientation="Horizontal"
+                                        Margin="0 0 0 5">
+                                        <materialDesign:PackIcon
+                                            Kind="MicrosoftWindows"
+                                            Height="50"
+                                            Width="50"
+                                            Foreground="DeepSkyBlue"
+                                            VerticalAlignment="Center"/>
+                                        <TextBlock
+                                            x:Name="TBlockWindowsVersionDB"
+                                            Text="Windows 10 Домашняя"
+                                            FontSize="24"
+                                            Width="160"
+                                            TextWrapping="Wrap"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center"/>
+                                    </StackPanel>
+
+                                    <TextBlock
+                                        Text="Ключ:"
+                                        Margin="5 0 0 5"/>
+                                    <TextBlock
+                                        x:Name="TBlockWindowsKeyDB"
+                                        Text="XXXXX-XXXXX-XXXXX-XXXXX"
+                                        VerticalAlignment="Center"
+                                        Margin="5 0 0 0"/>
+                                </StackPanel>
+                            </Grid>
+
+                            <!-- Тело -->
+                            <Border
+                                Grid.Row="1"
+                                Margin="10"
+                                BorderThickness="1"
+                                BorderBrush="Black"
+                                Width="725"
+                                HorizontalAlignment="Left">
+                                <TabControl
+                                    materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
+                                    SnapsToDevicePixels="True"
+                                    Style="{StaticResource MaterialDesignNavigationRailTabControl}"
+                                    TabStripPlacement="Left"
+                                    Height="305">
+                                    <!-- Комплектующие -->
+                                    <TabItem 
+                                        Width="130"
+                                        Margin="0 0 0 10"
+                                        Height="140">
+                                        <TabItem.Header>
+                                            <StackPanel>
+                                                <materialDesign:PackIcon
+                                                    Kind="Harddisk"
+                                                    Width="40"
+                                                    Height="40"
+                                                    VerticalAlignment="Center"
+                                                    HorizontalAlignment="Center"
+                                                    Foreground="Black"/>
+                                                <TextBlock
+                                                    Text="Комплектующие"
+                                                    VerticalAlignment="Center"
+                                                    HorizontalAlignment="Center"
+                                                    Foreground="Black"/>
+                                            </StackPanel>
+                                        </TabItem.Header>
+
+                                        <DataGrid
+                                            x:Name="DGridHardwareDB"
+                                            AutoGenerateColumns="False"
+                                            HeadersVisibility="Column"
+                                            CanUserAddRows="False"
+                                            CanUserDeleteRows="False"
+                                            CanUserReorderColumns="False"
+                                            CanUserResizeColumns="True"
+                                            CanUserResizeRows="True"
+                                            CanUserSortColumns="True"
+                                            IsReadOnly="True">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn
+                                                    Binding="{Binding Path=Title}"
+                                                    Header="Тип"
+                                                    Width="300"/>
+                                                <DataGridTextColumn
+                                                    Binding="{Binding Path=Value}"
+                                                    Header="Наименование"/>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </TabItem>
+
+                                    <!-- Сеть -->
+                                    <TabItem 
+                                    Width="130"
+                                    Height="160">
+                                        <TabItem.Header>
+                                            <StackPanel>
+                                                <materialDesign:PackIcon
+                                                Kind="NetworkPos"
+                                                Width="40"
+                                                Height="40"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                Foreground="Black"/>
+                                                <TextBlock
+                                                Text="Сеть"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                Foreground="Black"/>
+                                            </StackPanel>
+                                        </TabItem.Header>
+
+                                        <Border Padding="20">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <StackPanel Grid.Column="0">
+                                                    <TextBlock
+                                                    Text="Настройки IP:"
+                                                    FontSize="16"/>
+                                                </StackPanel>
+
+                                                <StackPanel Grid.Column="1">
+                                                    <TextBlock
+                                                    Text="Настройки DNS:"
+                                                    FontSize="16"/>
+                                                </StackPanel>
+
+                                                <Grid
+                                                Grid.Column="0"
+                                                Grid.ColumnSpan="2"
+                                                Margin="0 30 10 0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="1*"/>
+                                                        <RowDefinition Height="0.3*"/>
+                                                    </Grid.RowDefinitions>
+
+                                                    <materialDesign:Card
+                                                    x:Name="CardNetworkSettingsDB"
+                                                    Grid.Column="0"
+                                                    Grid.ColumnSpan="2"
+                                                    Grid.Row="0"
+                                                    Padding="5 0 5 0">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <StackPanel
+                                                            Grid.Column="0"
+                                                            Margin="0 10 0 0">
+                                                                <TextBlock
+                                                                Text="IP-адрес:"/>
+                                                                <TextBox
+                                                                x:Name="TBoxIPV4DB"
+                                                                Width="170"
+                                                                Height="25"
+                                                                HorizontalAlignment="Left"
+                                                                Margin="0 0 0 2"
+                                                                IsEnabled="False"/>
+
+                                                                <TextBlock
+                                                                Text="Маска подсети:"/>
+                                                                <TextBox
+                                                                x:Name="TBoxSubnetMaskDB"
+                                                                Height="25"
+                                                                Width="170"
+                                                                HorizontalAlignment="Left"
+                                                                Margin="0 0 0 2"
+                                                                IsEnabled="False"/>
+
+                                                                <TextBlock
+                                                                Text="Основной шлюз:"/>
+                                                                <TextBox
+                                                                x:Name="TBoxGatewayDB"
+                                                                Height="25"
+                                                                Width="170"
+                                                                HorizontalAlignment="Left"
+                                                                IsEnabled="False" Cursor=""/>
+                                                            </StackPanel>
+
+                                                            <StackPanel
+                                                            Grid.Column="1"
+                                                            Margin="0 10 0 0">
+                                                                <TextBlock
+                                                                Text="DNS-сервер:"/>
+                                                                <TextBox
+                                                                x:Name="TBoxDNSDB"
+                                                                Height="25"
+                                                                Width="180"
+                                                                HorizontalAlignment="Left"
+                                                                IsEnabled="False"/>
+                                                            </StackPanel>
+                                                        </Grid>
+                                                    </materialDesign:Card>
+                                                </Grid>
+
+                                                <StackPanel Grid.Column="2">
+                                                    <TextBlock
+                                                    Text="Настройки Proxy:"
+                                                    FontSize="16"
+                                                    Margin="0 0 0 10"/>
+
+                                                    <StackPanel x:Name="SPanelProxySettingsDB">
+                                                        <TextBlock
+                                                        Text="Адрес:"/>
+                                                        <TextBox
+                                                        x:Name="TBoxProxyAdressDB"
+                                                        Margin="0 0 0 10"
+                                                        IsEnabled="False"/>
+
+                                                        <TextBlock
+                                                        Text="Порт:"/>
+                                                        <TextBox
+                                                        x:Name="TBoxProxyPortDB"
+                                                        Margin="0 0 0 65"
+                                                        IsEnabled="False"/>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </TabItem>
+                                </TabControl>
+                            </Border>
+
+                            <StackPanel 
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Center"
+                                Orientation="Horizontal"
+                                Grid.Row="2">
+                                <TextBlock
+                                    Text="№"
+                                    Margin="0 0 5 0"/>
+                                <TextBlock
+                                   x:Name="TBlockInventoryNumDB"/>
+                            </StackPanel>
+
+                            <StackPanel
+                                Grid.Row="1"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
+                                Width="35"
+                                Margin="0 0 0 10">
+                                <Button
+                                    x:Name="ButtonDeleteDevice"
+                                    Click="ButtonDeleteDevice_Click"
+                                    Background="Transparent"
+                                    BorderBrush="Black"
+                                    BorderThickness="0.5"
+                                    HorizontalAlignment="Center"
+                                    Width="35"
+                                    Height="35"
+                                    Margin="0"
+                                    Padding="0">
+                                    <StackPanel>
+                                        <materialDesign:PackIcon
+                                            Kind="TrashCan"
+                                            Width="35"
+                                            Height="35"
+                                            Foreground="Red"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Grid>    
+            </TabItem>
+        </TabControl>
+
+        <!-- Footer -->
+        <Border
+            Padding="5 0 5 0"
+            Grid.Row="1"
+            BorderBrush="Black"
+            BorderThickness="0">
+            <Grid Height="30">
+                <Separator
+                    BorderBrush="Black"
+                    BorderThickness="2"
+                    VerticalAlignment="Top"/>
+                <StackPanel
+                    Orientation="Horizontal"
+                    Margin="0 5 0 0">
+                    <TextBlock
+                        Text="Последнее обновление: "
+                        VerticalAlignment="Center"/>
+                    <TextBlock
+                        x:Name="TBlockLastUpdate"
+                        Text="30.12.9999"
+                        VerticalAlignment="Center"/>
+
+                    <Button
+                        x:Name="ButtonRefreshData"
+                        Click="ButtonRefresData_Click"
+                        BorderThickness="0"
+                        Background="Transparent"
+                        Width="30"
+                        VerticalAlignment="Center"
+                        Padding="0">
+                        <materialDesign:PackIcon 
+                            Kind="Reload"
+                            Foreground="Black"
+                            Width="20"
+                            Height="20"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel 
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom">
+                    <TextBlock
+                        Text="№"
+                        Margin="0 0 5 0"
+                        VerticalAlignment="Center"/>
+                    <TextBlock
+                        x:Name="TBlockPcInventoryNum"
+                        VerticalAlignment="Center"
+                        Text="-"
+                        Margin="0 0 10 0"/>
+                    <Button
+                        Click="ButtonEditInventoryNum_Click"
+                        Height="22"
+                        Width="22"
+                        Padding="0"
+                        Background="Transparent"
+                        BorderBrush="Black">
+                        <materialDesign:PackIcon 
+                            Kind="Edit"
+                            Foreground="Black"/>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel 
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom">
+                    <TextBlock
+                        Text="Статус БД: "
+                        VerticalAlignment="Center"/>
+                    
+                    <materialDesign:PackIcon 
+                        x:Name="IconDbStatus"
+                        Kind="Check"
+                        VerticalAlignment="Center"
+                        Width="25"
+                        Height="25"
+                        Margin="0 0 10 0"/>
+
+                    <Button
+                        Click="ButtonEditDb_Click"
+                        Height="22"
+                        Width="22"
+                        Padding="0"
+                        Background="Transparent"
+                        BorderBrush="Black">
+                        <materialDesign:PackIcon 
+                            Kind="Edit"
+                            Foreground="Black"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
