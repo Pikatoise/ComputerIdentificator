@@ -1,8 +1,6 @@
 # Курсовая работа
 ## _Идентификатор ПК_
 
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
-
 Программа, для устройств на операционной системе Windows, предоставляющая сведения об аппаратном и сетевом обеспечении устройства.
 
 ## Возможности ПО
@@ -23,6 +21,11 @@
 - [Material Design In XAML](http://materialdesigninxaml.net/) - UI библиотека
 
 ## Дизайн
+
+![image](https://github.com/Pikatoise/ComputerIdentificator/assets/89105378/68c58725-14b0-4b38-bee0-e9945e8c7ece)
+
+![image](https://github.com/Pikatoise/ComputerIdentificator/assets/89105378/d1c31ae0-d4f1-4010-acdc-1afa476d85e4)
+
 
 ## Установка
 
