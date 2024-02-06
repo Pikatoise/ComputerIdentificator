@@ -25,17 +25,3 @@
 ![image](https://github.com/Pikatoise/ComputerIdentificator/assets/89105378/68c58725-14b0-4b38-bee0-e9945e8c7ece)
 
 ![image](https://github.com/Pikatoise/ComputerIdentificator/assets/89105378/d1c31ae0-d4f1-4010-acdc-1afa476d85e4)
-
-
-## Установка
-
-Идентификатор ПК использует для запуска [.NET 7.0+](https://dotnet.microsoft.com/en-us/download/dotnet/7.0).
-
-1. Клонируйте репозиторий 
-```sh
-git clone https://github.com/Pikatoise/ComputerIdentificator.git
-```
-
-2. Импортируйте схему БД локально/на сервер из файла computers.sql 
-
-**Free Software**
